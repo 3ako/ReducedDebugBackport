@@ -1,0 +1,15 @@
+name: ReducedDebugBackport
+version: '${version}'
+main: hw.zako.reduceddebugbackport.ReducedDebugBackport
+api-version: '1.16'
+author: zako
+description: Backports the server reducedDebugInfo flag to newer (ViaVersion) clients to disable the visualize_entity_supporting_blocks debug renderer.
+softdepend: [packetevents, ProtocolLib, ViaVersion]
+commands:
+  rdb:
+    description: Show your detected protocol version and force-send reduced debug info (status 22). Use /rdb off to send status 23.
+    usage: /rdb [off]
+permissions:
+  reduceddebugbackport.bypass:
+    description: Players with this permission are ignored - reducedDebugInfo is not sent, they keep full F3.
+    default: false

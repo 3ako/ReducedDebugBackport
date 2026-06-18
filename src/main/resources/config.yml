@@ -1,0 +1,32 @@
+# ReducedDebugBackport
+# Backports the server-side reducedDebugInfo flag to newer clients (the ones that
+# connect through ViaVersion to a 1.16 server) in order to disable the debug renderer
+# visualize_entity_supporting_blocks - it reveals players who are invisible.
+#
+# How it works: the client is sent an Entity Status (Entity Event) with status 22
+# (= enable reduced debug info). ViaVersion translates the packet into the client's protocol.
+
+# Client protocol version FROM which to start sending reducedDebugInfo.
+# Clients BELOW this value are left untouched (they keep F3 coordinates/hitboxes).
+#
+# Protocol numbers:
+#   754 = 1.16.5
+#   755 = 1.17     756 = 1.17.1
+#   757 = 1.18/.1  758 = 1.18.2
+#   759 = 1.19     760 = 1.19.1/.2   761 = 1.19.3   762 = 1.19.4
+#   763 = 1.20/.1  764 = 1.20.2      765 = 1.20.3/.4  766 = 1.20.5/.6
+#   767 = 1.21/.1  768 = 1.21.2/.3   769 = 1.21.4   770 = 1.21.5
+#   771 = 1.21.6   772 = 1.21.7/.8   773 = 1.21.9   774 = 1.21.11
+#
+# The visualize_entity_supporting_blocks renderer is confirmed on 1.21.11.
+# By default we cut off starting from 1.21.11 (774). If the renderer turns out
+# to exist on earlier 1.21.x too - lower this value.
+min-protocol-version: 774
+
+# Log every flag send to the console (for debugging).
+log-actions: false
+
+# Verbose log: for EACH player prints the detected protocol version and the
+# decision (SKIP/SENT). Enable it if the plugin "does not block" - you will see
+# which version the backend actually detected.
+debug: false
