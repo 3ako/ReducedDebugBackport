@@ -1,4 +1,4 @@
-package hw.zako.reduceddebugbackport;
+package hw.zako.reduceddebugbackport.applier;
 
 import com.viaversion.viaversion.api.Via;
 import org.bukkit.entity.Player;
